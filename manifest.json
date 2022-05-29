@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Remove Youtube Shorts",
+  "version": "1.0",
+  "description": "Remove Youtube Shorts in navigation bar, and auto redirect Youtube Shorts Videos to normal Youtube video player, for better experience on desktop.",
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "js": ["removeShortInNav.js"]
+    }
+  ],
+  "background": {
+    "scripts":["redirect.js"]
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": ["tabs"]
+}
