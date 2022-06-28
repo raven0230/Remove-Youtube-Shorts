@@ -25,3 +25,12 @@ waitForElm("ytd-guide-section-renderer a[title=Shorts]").then((elem) =>
 waitForElm("ytd-mini-guide-entry-renderer[aria-label=Shorts]").then((elem) => {
   elem.remove();
 });
+
+//remove yt short sections
+waitForElm("ytd-rich-section-renderer").then((elem) => {
+	let targets = Array.from(elem.getElementsByTagName("ytd-rich-shelf-renderer")).filter((e)=> e.hasAttribute("is-shorts"));
+	if (targets.length>0){
+		console.log("remove!!!");
+		elem.style.display = "none";
+	};
+});
