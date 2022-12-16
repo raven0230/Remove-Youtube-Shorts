@@ -8,7 +8,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.youtube.com/*"],
-      "js": ["removeShortInNav.js"]
+      "js": ["removeShortsDom.js"]
     }
   ],
   "background": {
