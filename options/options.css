@@ -1,0 +1,43 @@
+.mt {
+  margin-top: 0.5rem;
+}
+
+.ml {
+  margin-left: 0.5rem;
+}
+
+.checkbox-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#saved-label {
+  margin-top: 0.5rem;
+  opacity: 0;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  25% {    
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  animation:fadeOut 4s forwards;
+}
+
+.fadeOutEnd {
+  opacity: 0;
+}

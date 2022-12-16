@@ -19,5 +19,9 @@
     "48": "icons/icon-48.png",
     "96": "icons/icon-96.png"
   },
-  "permissions": ["tabs", "storage", "menus"]
+  "permissions": ["tabs", "storage", "menus"],
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  }
 }

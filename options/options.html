@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+  <body>
+    <h1 class="ml">Options</h1>
+    <form>
+      <ul class="checkbox-list">
+        <li>
+          <input type="checkbox" id="nav" name="nav" />
+          <label for="nav">Hide Shorts tab in navigation tab</label>
+        </li>
+        <li>
+          <input type="checkbox" id="homefeed" name="homefeed" />
+          <label for="homefeed">Hide Shorts section in Home feed</label>
+        </li>
+        <li>
+          <input type="checkbox" id="channel" name="channel" />
+          <label for="homefeed">Hide Shorts tab in channel page</label>
+        </li>
+      </ul>
+      <button class="mt ml" type="submit">Save</button>
+    </form>
+    <div id="saved-label">Options saved</div>
+    <script src="options.js"></script>
+  </body>
+</html>
