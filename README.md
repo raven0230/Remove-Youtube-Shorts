@@ -6,11 +6,11 @@ Currently, Youtube Shorts video player design is completely mobile oriented, and
 1. Remove Shorts tab in navigation tab
 2. Redirect Shorts videos to original Youtube Video player
 
-## Changelog
+# Changelog
 
-### [v1.1] - 2022-12-17
+## [v1.1] - 2022-12-17
 
-#### Added
+### Added
 - Right click menu (only shown in YouTube.com) and extension option page for customizations
 - Able to remove Shorts Section in Homefeed
 - Able to remove Shorts Tab in channel page
