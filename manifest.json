@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Remove Youtube Shorts",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Remove Youtube Shorts tab in navigation tab, and redirect Youtube Shorts Videos to original Youtube video player, for better experience on desktop.",
   "homepage_url": "https://github.com/raven0230/Remove-Youtube-Shorts",
   "author": "Raven Liu",
@@ -15,6 +15,7 @@
     "scripts":["redirect.js"]
   },
   "icons": {
+    "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
     "96": "icons/icon-96.png"
   },
