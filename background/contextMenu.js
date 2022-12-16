@@ -33,6 +33,25 @@ function onCreated() {
 function createContextMenu() {
   browser.menus.create(
     {
+      id: "reminder",
+      title: "Refresh is required to apply changes",
+      contexts: ["all"],
+      enabled: false,
+    },
+    onCreated
+  );
+
+  browser.menus.create(
+    {
+      id: "separator-1",
+      type: "separator",
+      contexts: ["all"],
+    },
+    onCreated
+  );
+
+  browser.menus.create(
+    {
       id: "check-nav",
       type: "checkbox",
       title: "Hide Shorts tab in navigation tab",
@@ -57,7 +76,7 @@ function createContextMenu() {
     {
       id: "check-channel",
       type: "checkbox",
-      title: "Hide Shorts tab in channel page",
+      title: "Hide Shorts tab in channel page (Experimental)",
       contexts: ["all"],
       checked: addonOptions.channel,
     },
