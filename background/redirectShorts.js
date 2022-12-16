@@ -1,8 +1,11 @@
 function handleUpdated(tabId, changeInfo, tabInfo) {
   if (changeInfo.url) {
-    const re = /https:\/\/www.youtube.com\/shorts\/([a-zA-Z0-9_-]{11})/;
+    // if url matches YouTube Shorts url format,
+    const re =
+      /(?:http|https):\/\/www.youtube.com\/shorts\/([a-zA-Z0-9_-]{11})/;
     const found = changeInfo.url.match(re);
     if (found[1]) {
+      // redirect url to original YouTube video player
       browser.tabs
         .update(tabId, {
           url: `https://www.youtube.com/watch?v=${found[1]}`,
@@ -14,6 +17,7 @@ function handleUpdated(tabId, changeInfo, tabInfo) {
   }
 }
 
+// listen to url changes
 browser.tabs.onUpdated.addListener(handleUpdated, {
-  urls: ["https://www.youtube.com/*"],
+  urls: ["*://www.youtube.com/shorts/*"],
 });

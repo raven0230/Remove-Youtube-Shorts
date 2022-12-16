@@ -12,7 +12,7 @@
     }
   ],
   "background": {
-    "scripts":["redirect.js"]
+    "scripts":["background/redirectShorts.js"]
   },
   "icons": {
     "32": "icons/icon-32.png",
