@@ -1,11 +1,12 @@
 function restoreOptions() {
   // read options and set value to checkboxes
   browser.storage.local
-    .get(["nav", "homefeed", "channel"])
+    .get(["nav", "homefeed", "channel", "menu"])
     .then((options) => {
       document.querySelector("input#nav").checked = options.nav;
       document.querySelector("input#homefeed").checked = options.homefeed;
       document.querySelector("input#channel").checked = options.channel;
+      document.querySelector("input#menu").checked = options.menu;
     })
     .catch((err) => console.log(err));
 }
@@ -32,6 +33,7 @@ function saveOptions(e) {
     nav: document.querySelector("input#nav").checked,
     homefeed: document.querySelector("input#homefeed").checked,
     channel: document.querySelector("input#channel").checked,
+    menu: document.querySelector("input#menu").checked,
   };
   browser.storage.local
     .set(newOptions)

@@ -2,7 +2,7 @@
 let addonOptions;
 
 browser.storage.local
-  .get(["nav", "homefeed", "channel"])
+  .get(["nav", "homefeed", "channel", "menu"])
   .then((options) => {
     if (options.nav === undefined) {
       console.log("initializing options");
@@ -11,11 +11,13 @@ browser.storage.local
         nav: true,
         homefeed: true,
         channel: false,
+        menu: true,
       };
       browser.storage.local.set({
         nav: true,
         homefeed: true,
         channel: false,
+        menu: true,
       });
     } else addonOptions = options;
   })
@@ -82,23 +84,47 @@ function createContextMenu() {
     },
     onCreated
   );
+
+  browser.menus.create(
+    {
+      id: "separator-2",
+      type: "separator",
+      contexts: ["all"],
+    },
+    onCreated
+  );
+
+  browser.menus.create(
+    {
+      id: "check-menu",
+      type: "checkbox",
+      title: "Enable context menu",
+      contexts: ["all"],
+      checked: addonOptions.menu,
+    },
+    onCreated
+  );
 }
 
 // initialize state
 let contextMenuState = false;
+
+function removeContextMenu() {
+  browser.menus
+    .removeAll()
+    .then(console.log("items removed successfully"))
+    .catch((err) => console.error(err));
+  contextMenuState = false;
+}
 
 function updateContextMenu(currentTabUrl) {
   const re = /(?:http|https):\/\/www.youtube.com\/.*/;
   const found = currentTabUrl.match(re);
   if (contextMenuState && !found) {
     // if menu is shown, and new tab is not in YouTube domain, remove context menu
-    browser.menus
-      .removeAll()
-      .then(console.log("items removed successfully"))
-      .catch((err) => console.error(err));
-    contextMenuState = false;
-  } else if (!contextMenuState && found) {
-    // if menu is not shown, and new tab is in YouTube domain, create context menu
+    removeContextMenu();
+  } else if (!contextMenuState && found && addonOptions.menu) {
+    // if menu is not shown, and new tab is in YouTube domain, and context menu is enabled, create context menu
     createContextMenu();
     contextMenuState = true;
   }
@@ -127,28 +153,37 @@ browser.tabs.onActivated.addListener(handleTabChange);
 
 // handle menu options on click
 function handleContextMenuClick(info, tab) {
-  // update options
-  switch (info.menuItemId) {
-    case "check-nav":
-      addonOptions.nav = info.checked;
-      break;
-    case "check-homefeed":
-      addonOptions.homefeed = info.checked;
-      break;
-    case "check-channel":
-      addonOptions.channel = info.checked;
-      break;
-    default:
-      break;
-  }
+  // get option type
+  const type = info.menuItemId.split("-")[1];
 
-  // save to storage
+  // update option
+  addonOptions[type] = info.checked;
+
+  // update local storage
+  let updateOption = {};
+  updateOption[type] = info.checked;
+
   browser.storage.local
-    .set(addonOptions)
+    .set(updateOption)
     .then(() => {
       console.log("success");
     })
     .catch((err) => console.error(err));
+
+  // if menu option unchecked, remove context menu
+  if (type === "menu" && !info.checked) removeContextMenu();
 }
 
 browser.menus.onClicked.addListener(handleContextMenuClick);
+
+function handleLocalStorageChange(changes) {
+  // update options on changes from option form
+  const changedItems = Object.keys(changes);
+  for (const item of changedItems) {
+    if (changes[item].oldValue !== changes[item].newValue) {
+      addonOptions[item] = changes[item].newValue;
+    }
+  }
+}
+
+browser.storage.local.onChanged.addListener(handleLocalStorageChange);
