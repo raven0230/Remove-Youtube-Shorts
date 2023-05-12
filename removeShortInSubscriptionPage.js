@@ -1,7 +1,6 @@
 function removeShorts(subVideoList) {
   subVideoList
     .querySelectorAll(
-      // "ytd-shelf-renderer:not([style*='display: none']) ytd-thumbnail span[aria-label='Shorts']"
       "ytd-shelf-renderer:not([style*='display: none']) ytd-thumbnail a[href^='/shorts']"
     )
     .forEach(
@@ -12,7 +11,6 @@ function removeShorts(subVideoList) {
 function removeIfShort(elem) {
   if (elem.querySelector("ytd-thumbnail a[href^='/shorts']")) {
     elem.style.display = "none";
-    console.log("removed");
   }
 }
 
@@ -27,7 +25,6 @@ browser.storage.local
           removeShorts(subVideoList);
 
           const observer = new MutationObserver((mutations) => {
-            console.log("test");
             mutations.forEach((mutation) =>
               mutation.addedNodes.forEach((node) => removeIfShort(node))
             );

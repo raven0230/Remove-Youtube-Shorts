@@ -1,5 +1,4 @@
 function removeShortTab(tabList) {
-  console.log("test");
   const tabs = tabList.querySelectorAll("div.tab-title");
   tabs.forEach((tab) => {
     if (tab.textContent.trim() === "Shorts") {
