@@ -5,12 +5,25 @@
 Currently, Youtube Shorts video player design is completely mobile oriented, and it's annoying to some users on desktop. This add-on try to solve problems by:
 1. Remove Shorts tab in navigation tab
 2. Redirect Shorts videos to original Youtube Video player
+3. Remove Shorts Tab in channel page
+4. Remove Shorts in subscription page  
+(Subscription page might be loading slower with this feature)
 
 # Changelog
 
+## [v1.2] - 2023-05-12
+
+### New Features
+- Remove Shorts in subscription page  
+(Subscription page might be loading slower with this feature)
+- Now can hide right click menu options
+
+### Bug Fixes
+- Inaccurate interactions in option form
+
 ## [v1.1] - 2022-12-17
 
-### Added
+### New Features
 - Right click menu (only shown in YouTube.com) and extension option page for customizations
-- Able to remove Shorts Section in Homefeed
-- Able to remove Shorts Tab in channel page
+- Remove Shorts Section in Homefeed
+- Remove Shorts Tab in channel page
