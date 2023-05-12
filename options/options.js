@@ -1,7 +1,9 @@
+const optionList = ["nav", "homefeed", "channel", "subs", "menu"];
+
 function restoreOptions() {
   // read options and set value to checkboxes
   browser.storage.local
-    .get(["nav", "homefeed", "channel", "menu", "subs"])
+    .get(optionList)
     .then((options) => {
       document.querySelector("input#nav").checked = options.nav;
       document.querySelector("input#homefeed").checked = options.homefeed;

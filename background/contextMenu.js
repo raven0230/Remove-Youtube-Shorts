@@ -1,10 +1,15 @@
 // read addon options
 let addonOptions;
+const optionList = ["nav", "homefeed", "channel", "subs", "menu"];
 
 browser.storage.local
-  .get(["nav", "homefeed", "channel", "menu"])
+  .get(optionList)
   .then((options) => {
-    if (options.nav === undefined) {
+    console.log(options, Object.keys(options));
+    if (
+      options.nav === undefined ||
+      !optionList.every((option) => options.hasOwnProperty(option))
+    ) {
       console.log("initializing options");
       // initialize
       addonOptions = {
