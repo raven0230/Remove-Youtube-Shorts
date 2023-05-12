@@ -1,51 +1,27 @@
-function waitForElm(selector) {
-  return new Promise((resolve) => {
-    if (document.querySelector(selector)) {
-      return resolve(document.querySelector(selector));
+function removeShortTab(tabList) {
+  console.log("test");
+  const tabs = tabList.querySelectorAll("div.tab-title");
+  tabs.forEach((tab) => {
+    if (tab.textContent.trim() === "Shorts") {
+      tab.closest("tp-yt-paper-tab").remove();
     }
-
-    const observer = new MutationObserver((mutations) => {
-      if (document.querySelector(selector)) {
-        resolve(document.querySelector(selector));
-        observer.disconnect();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
   });
-}
-
-function removeShortTab() {
-  const tabs = document.querySelectorAll(
-    "tp-yt-paper-tabs tp-yt-paper-tab div"
-  );
-  if (tabs.length > 0) {
-    tabs.forEach((tab) => {
-      if (tab.textContent.trim() === "Shorts") {
-        tab.parentElement.remove();
-      }
-    });
-  }
 }
 
 browser.storage.local
   .get(["channel"])
   .then((options) => {
     if (options.channel) {
-      waitForElm("tp-yt-paper-tabs")
-        .then((tabs) => {
-          removeShortTab();
+      waitForElm("tp-yt-paper-tabs div#tabsContent")
+        .then((tabList) => {
+          removeShortTab(tabList);
 
           const observer = new MutationObserver((mutations) => {
-            removeShortTab();
+            removeShortTab(tabList);
           });
 
-          observer.observe(tabs, {
+          observer.observe(tabList, {
             childList: true,
-            subtree: true,
           });
         })
         .catch((err) => console.error(err));

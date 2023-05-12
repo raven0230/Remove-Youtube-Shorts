@@ -8,7 +8,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.youtube.com/*"],
-      "js": ["removeShortsDom.js", "removeShortSectionInChannelPage.js"]
+      "js": ["waitForElm.js", "removeShortsDom.js", "removeShortSectionInChannelPage.js"]
     }
   ],
   "background": {
