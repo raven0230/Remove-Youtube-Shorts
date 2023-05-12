@@ -10,15 +10,11 @@ browser.storage.local
       addonOptions = {
         nav: true,
         homefeed: true,
-        channel: false,
+        channel: true,
+        subs: true,
         menu: true,
       };
-      browser.storage.local.set({
-        nav: true,
-        homefeed: true,
-        channel: false,
-        menu: true,
-      });
+      browser.storage.local.set(addonOptions);
     } else addonOptions = options;
   })
   .catch((err) => console.error(err));
@@ -78,9 +74,20 @@ function createContextMenu() {
     {
       id: "check-channel",
       type: "checkbox",
-      title: "Hide Shorts tab in channel page (Experimental)",
+      title: "Hide Shorts tab in channel page",
       contexts: ["all"],
       checked: addonOptions.channel,
+    },
+    onCreated
+  );
+
+  browser.menus.create(
+    {
+      id: "check-subs",
+      type: "checkbox",
+      title: "Hide Shorts from Subscriptions page",
+      contexts: ["all"],
+      checked: addonOptions.subs,
     },
     onCreated
   );

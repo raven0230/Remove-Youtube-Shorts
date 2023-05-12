@@ -1,12 +1,13 @@
 function restoreOptions() {
   // read options and set value to checkboxes
   browser.storage.local
-    .get(["nav", "homefeed", "channel", "menu"])
+    .get(["nav", "homefeed", "channel", "menu", "subs"])
     .then((options) => {
       document.querySelector("input#nav").checked = options.nav;
       document.querySelector("input#homefeed").checked = options.homefeed;
       document.querySelector("input#channel").checked = options.channel;
       document.querySelector("input#menu").checked = options.menu;
+      document.querySelector("input#subs").checked = options.subs;
     })
     .catch((err) => console.log(err));
 }
@@ -26,19 +27,19 @@ const savedLabel = document.getElementById("saved-label");
 function saveOptions(e) {
   e.preventDefault();
 
-  if (savedLabel.className === "") savedLabel.className = "fadeOut";
-  else reset_animation();
-
   const newOptions = {
     nav: document.querySelector("input#nav").checked,
     homefeed: document.querySelector("input#homefeed").checked,
     channel: document.querySelector("input#channel").checked,
     menu: document.querySelector("input#menu").checked,
+    subs: document.querySelector("input#subs").checked,
   };
   browser.storage.local
     .set(newOptions)
     .then(() => {
       console.log("success");
+      if (savedLabel.className === "") savedLabel.className = "fadeOut";
+      else reset_animation();
     })
     .catch((err) => console.log(err));
 }
