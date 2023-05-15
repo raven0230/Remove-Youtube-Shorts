@@ -11,6 +11,11 @@ Currently, Youtube Shorts video player design is completely mobile oriented, and
 
 # Changelog
 
+## [v1.2.1] - 2023-05-16
+
+### Hotfix
+- There were issues when "Remove Shorts in subscription page" is enabled, and grid layout is used in subscription page. The extension should now handle grid layout correctly.
+
 ## [v1.2] - 2023-05-12
 
 ### New Features
